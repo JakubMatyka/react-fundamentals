@@ -35,4 +35,5 @@ jobs:
         with:
           url: ${{ secrets.COOLIFY_WEBHOOK_URL }}
           method: "POST"
+          customHeaders: '{"Authorization": "Bearer ${{ secrets.COOLIFY_TOKEN }}"}'
           data: '{"branch": "main"}'
