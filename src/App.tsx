@@ -11,7 +11,7 @@ function App() {
         <header className="app-header">
           <h1>React Fundamentals</h1>
           <p className="deployment-info">
-            🚀 Auto-deployed via Coolify - CI/CD Pipeline COMPLETE! 🎉
+            🚀 Auto-deployed via Coolify - updated! 🎉
           </p>
         </header>
         <main className="app-main">
