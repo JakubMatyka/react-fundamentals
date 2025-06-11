@@ -1,7 +1,4 @@
 import "./App.css";
-import { StatefulForm } from "./components/FormAction";
-import { MemoAction } from "./components/MemoAciton";
-import { RandomComponent } from "./components/RandomComponent";
 import { TextInputForm } from "./components/TextInputForm";
 import { TextDisplay } from "./components/TextDisplay";
 import { TextControls } from "./components/TextControls";
@@ -9,18 +6,18 @@ import { TextProvider } from "./contexts/text";
 
 function App() {
   return (
-    <TextProvider initialText="Welcome to useReducer demo!">
-      <TextInputForm />
-      <hr />
-      <TextControls />
-      <hr />
-      <RandomComponent />
-      <hr />
-      <TextDisplay />
-      <hr />
-      <StatefulForm />
-      <hr />
-      <MemoAction />
+    <TextProvider initialText="Welcome to React Fundamentals!">
+      <div className="app">
+        <header className="app-header">
+          <h1>React Fundamentals</h1>
+          <p className="deployment-info">🚀 Auto-deployed via Coolify</p>
+        </header>
+        <main className="app-main">
+          <TextDisplay />
+          <TextInputForm />
+          <TextControls />
+        </main>
+      </div>
     </TextProvider>
   );
 }
