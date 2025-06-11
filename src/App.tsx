@@ -10,7 +10,9 @@ function App() {
       <div className="app">
         <header className="app-header">
           <h1>React Fundamentals</h1>
-          <p className="deployment-info">🚀 Auto-deployed via Coolify</p>
+          <p className="deployment-info">
+            🚀 Auto-deployed via Coolify - CI/CD Pipeline Active!
+          </p>
         </header>
         <main className="app-main">
           <TextDisplay />
