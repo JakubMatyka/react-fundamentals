@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useTransition,
-  useOptimistic,
-  useEffect,
-} from "react";
+import { useEffect, useOptimistic, useState, useTransition } from "react";
 
 type Task = {
   id: string;
