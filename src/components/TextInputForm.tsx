@@ -1,83 +1,47 @@
-import { useActionState, useEffect, useRef } from "react";
-import { updateTextAction } from "../action";
+import { useActionState } from "react";
 import { useTextContext } from "../contexts/text";
+import { updateTextAction } from "../action";
 
 export function TextInputForm() {
-  const { updateText, text: currentText } = useTextContext();
-  const lastProcessedText = useRef<string>("");
-
-  // useActionState for handling form submission
+  const { text } = useTextContext();
   const [state, formAction, isPending] = useActionState(updateTextAction, {
-    text: "",
+    text: text,
     success: false,
     error: false,
   });
 
-  // Update context when form action succeeds (prevent infinite loop)
-  useEffect(() => {
-    if (
-      state.success &&
-      state.text &&
-      state.text !== lastProcessedText.current
-    ) {
-      // Only update if the text is different from what we last processed
-      // and different from current context text
-      if (state.text !== currentText) {
-        lastProcessedText.current = state.text;
-        updateText(state.text);
-      }
-    }
-  }, [state.success, state.text, currentText]); // Removed updateText from dependencies
-
   return (
-    <div>
-      <h3>Update Text with Form Action</h3>
-      <form
-        style={{
-          display: "flex",
-          gap: "10px",
-          flexDirection: "column",
-          maxWidth: "300px",
-        }}
-      >
+    <div className="space-y-4">
+      <h4 className="font-semibold text-gray-900 dark:text-gray-100 text-base">
+        Update Text with Form Action
+      </h4>
+      <form action={formAction} className="space-y-3">
         <input
           type="text"
           name="text"
+          defaultValue={text}
+          className="w-full text-sm px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           placeholder="Enter new text..."
-          style={{
-            padding: "8px",
-            border: "1px solid #ccc",
-            borderRadius: "4px",
-          }}
           disabled={isPending}
         />
         <button
-          formAction={formAction}
+          type="submit"
           disabled={isPending}
-          style={{
-            padding: "10px",
-            backgroundColor: isPending ? "#ccc" : "#007bff",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            cursor: isPending ? "not-allowed" : "pointer",
-          }}
+          className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-sm"
         >
           {isPending ? "Updating..." : "Update Text"}
         </button>
-
-        {state.error && (
-          <p style={{ margin: 0, color: "red", fontSize: "14px" }}>
-            Error: Please enter valid text
-          </p>
-        )}
-
-        {state.success && (
-          <p style={{ margin: 0, color: "green", fontSize: "14px" }}>
-            Text updated successfully!
-          </p>
-        )}
       </form>
+      {state.success && (
+        <div className="text-green-600 dark:text-green-400 text-xs font-medium">
+          ✅ Text updated successfully!
+        </div>
+      )}
+      {state.error && (
+        <div className="text-red-600 dark:text-red-400 text-xs font-medium">
+          ❌ Please enter valid text
+        </div>
+      )}
     </div>
   );
 }
