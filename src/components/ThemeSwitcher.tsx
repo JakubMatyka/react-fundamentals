@@ -2,151 +2,203 @@ import { useTheme } from "../contexts/theme";
 
 export function ThemeSwitcher() {
   const { theme, toggleTheme } = useTheme();
-
-  const getThemeIcon = () => {
-    if (theme === "light") {
-      return (
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle
-            cx="12"
-            cy="12"
-            r="5"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          />
-          <path
-            d="M12 2V4"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M12 20V22"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M4 12H2"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M22 12H20"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M19.07 4.93L17.66 6.34"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M6.34 17.66L4.93 19.07"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M19.07 19.07L17.66 17.66"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M6.34 6.34L4.93 4.93"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-        </svg>
-      );
-    } else if (theme === "dark") {
-      return (
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M21.0672 11.8568L20.4253 11.469L21.0672 11.8568ZM12.1432 2.93276L11.7553 2.29085V2.29085L12.1432 2.93276ZM21.25 12C21.25 17.1086 17.1086 21.25 12 21.25V22.75C17.9371 22.75 22.75 17.9371 22.75 12H21.25ZM12 21.25C6.89137 21.25 2.75 17.1086 2.75 12H1.25C1.25 17.9371 6.06294 22.75 12 22.75V21.25ZM2.75 12C2.75 6.89137 6.89137 2.75 12 2.75V1.25C6.06294 1.25 1.25 6.06294 1.25 12H2.75ZM15.5 14.25C12.3244 14.25 9.75 11.6756 9.75 8.5H8.25C8.25 12.5041 11.4959 15.75 15.5 15.75V14.25ZM20.4253 11.469C19.4172 13.1373 17.5882 14.25 15.5 14.25V15.75C18.1349 15.75 20.4407 14.3439 21.7092 12.2447L20.4253 11.469ZM9.75 8.5C9.75 6.41182 10.8627 4.58284 12.531 3.57467L11.7553 2.29085C9.65609 3.5593 8.25 5.86509 8.25 8.5H9.75ZM12 2.75C11.9115 2.75 11.8077 2.71008 11.7324 2.63168C11.6686 2.56527 11.671 2.4956 11.7553 2.29085L12.531 3.57467C12.7825 3.41245 13.1201 3.36359 13.4449 3.44721C13.7608 3.52818 14.0585 3.73434 14.2487 4.02124C14.4389 4.30814 14.5 4.64307 14.5 5V1.25C14.5 0.532312 14.2017 -0.0322738 13.7626 -0.343972C13.3326 -0.649476 12.6676 -0.660024 12 2.75ZM21.7092 12.2447C21.8714 12.0932 21.9203 11.7556 21.8366 11.4308C21.7556 11.1149 21.5494 10.8172 21.2625 10.627C20.9756 10.4368 20.6407 10.3757 20.297 10.3757H22.75C22.75 9.64269 22.1855 9.04646 21.6080 8.73476C21.0214 8.41672 20.3398 8.42727 19.8675 8.75C19.3951 9.07273 19.25 9.60731 19.25 10.3757H22.75Z"
-            fill="currentColor"
-          />
-        </svg>
-      );
-    } else {
-      // System theme icon
-      return (
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect
-            x="2"
-            y="4"
-            width="20"
-            height="14"
-            rx="2"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          />
-          <path
-            d="M8 20H16"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M12 18V20"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-        </svg>
-      );
-    }
-  };
-
-  const getThemeLabel = () => {
-    switch (theme) {
-      case "light":
-        return "Light mode";
-      case "dark":
-        return "Dark mode";
-      case "system":
-        return "System preference";
-      default:
-        return "Toggle theme";
-    }
-  };
-
-  const getNextTheme = () => {
-    if (theme === "light") return "dark";
-    if (theme === "dark") return "system";
-    return "light";
-  };
+  const isDark = theme === "dark";
 
   return (
-    <button
-      onClick={toggleTheme}
-      className="fixed top-4 right-4 z-50 p-3 backdrop-blur-lg rounded-full transition-all duration-200 shadow-lg bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-white dark:hover:bg-gray-800 hover:scale-105"
-      title={`${getThemeLabel()} - Click to switch to ${getNextTheme()}`}
-    >
-      {getThemeIcon()}
-    </button>
+    <div className="fixed top-4 right-4 z-50">
+      <button
+        onClick={toggleTheme}
+        className="relative w-25 h-10 rounded-full transition-all duration-500 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-opacity-50"
+        style={{
+          background: isDark ? "hsl(229, 25%, 16%)" : "hsl(204, 53%, 47%)",
+          // Multiple shadow layers for depth illusion
+          boxShadow: `
+            0 2px 1px -0.5px ${
+              isDark ? "rgb(255 255 255 / 0.95)" : "rgb(255 255 255 / 0.95)"
+            },
+            0 -2px 1px -0.5px ${
+              isDark ? "rgb(15 23 42 / 0.4)" : "rgb(15 23 42 / 0.2)"
+            },
+            0 2px 10px 0 ${
+              isDark ? "rgb(255 255 255 / 0.15)" : "rgb(255 255 255 / 0.15)"
+            },
+            0 4px 20px 0 ${
+              isDark ? "rgb(139 92 246 / 0.3)" : "rgb(56 189 248 / 0.3)"
+            }
+          `,
+        }}
+        aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
+      >
+        {/* Inner shadow layer for recessed effect */}
+        <div
+          className="absolute inset-0 rounded-full"
+          style={{
+            boxShadow: `
+              inset 0 -2.5px 2.5px 0 rgb(15 23 42 / 0.15),
+              inset 0 2.5px 2.5px 0 rgb(15 23 42 / 0.65)
+            `,
+          }}
+        />
+
+        {/* Content container with proper clipping */}
+        <div className="absolute inset-0 rounded-full overflow-hidden">
+          {/* Stars for dark mode */}
+          {isDark && (
+            <>
+              <div
+                className="absolute w-1 h-1 bg-white rounded-full transition-all duration-500"
+                style={{
+                  top: "20%",
+                  left: "15%",
+                  opacity: "0.8",
+                  transform: `scale(${isDark ? 1 : 0.25})`,
+                  transitionDelay: isDark ? "0.2s" : "0s",
+                }}
+              />
+              <div
+                className="absolute w-0.5 h-0.5 bg-white rounded-full transition-all duration-500"
+                style={{
+                  top: "30%",
+                  right: "20%",
+                  opacity: "0.6",
+                  transform: `scale(${isDark ? 1 : 0.25})`,
+                  transitionDelay: isDark ? "0.3s" : "0s",
+                }}
+              />
+              <div
+                className="absolute w-0.5 h-0.5 bg-white rounded-full transition-all duration-500"
+                style={{
+                  bottom: "20%",
+                  left: "25%",
+                  opacity: "0.7",
+                  transform: `scale(${isDark ? 1 : 0.25})`,
+                  transitionDelay: isDark ? "0.4s" : "0s",
+                }}
+              />
+              <div
+                className="absolute w-0.5 h-0.5 bg-white rounded-full transition-all duration-500"
+                style={{
+                  top: "50%",
+                  left: "30%",
+                  opacity: "0.5",
+                  transform: `scale(${isDark ? 1 : 0.25})`,
+                  transitionDelay: isDark ? "0.1s" : "0s",
+                }}
+              />
+              <div
+                className="absolute w-0.5 h-0.5 bg-white rounded-full transition-all duration-500"
+                style={{
+                  bottom: "30%",
+                  right: "30%",
+                  opacity: "0.6",
+                  transform: `scale(${isDark ? 1 : 0.25})`,
+                  transitionDelay: isDark ? "0.25s" : "0s",
+                }}
+              />
+            </>
+          )}
+
+          {/* Cloud star element using pseudo-element technique */}
+          <div
+            className="cloud-star absolute inset-0 transition-all duration-500"
+            style={
+              {
+                opacity: isDark ? 0 : 1,
+                "--cloud-shift": isDark ? 1 : 0,
+              } as React.CSSProperties
+            }
+          />
+        </div>
+
+        {/* Toggle circle with enhanced shadows */}
+        <div
+          className={`absolute top-1 w-8 h-8 bg-white rounded-full transform transition-all duration-500 ease-out flex items-center justify-center ${
+            isDark ? "translate-x-16" : "translate-x-1"
+          }`}
+          style={{
+            // Enhanced shadow for the toggle indicator
+            boxShadow: `
+              0 1px 2px 0 rgb(15 23 42 / 0.95),
+              0 -1px 2px 0 rgb(255 255 255 / 0.95),
+              0 2px 8px 0 rgb(15 23 42 / 0.5),
+              0 4px 16px 0 rgb(15 23 42 / 0.2)
+            `,
+          }}
+        >
+          {/* Sun/Moon using CodePen approach with enhanced shadows */}
+          <div className="relative w-full h-full p-0.5">
+            <span
+              className="sun absolute inset-0 rounded-full overflow-hidden transition-all duration-500"
+              style={{
+                background: "hsl(47, 91%, 58%)",
+                boxShadow: `
+                  inset 1px 1px 2px 0 rgb(255 255 255 / 0.95),
+                  inset -1px -1px 2px 0 rgb(146 64 14 / 0.5),
+                  0 0 4px 0 rgb(251 191 36 / 0.6)
+                `,
+              }}
+            >
+              <span
+                className="moon absolute rounded-full transition-all duration-500 ease-in-out"
+                style={{
+                  inset: "-1%",
+                  background: "#cbd5e1",
+                  transform: `translateX(${isDark ? "0%" : "100%"})`,
+                  boxShadow: `
+                    inset 1px 1px 2px 0 rgb(255 255 255 / 0.95),
+                    inset -1px -1px 2px 0 rgb(15 23 42 / 0.95),
+                    0 0 4px 0 rgb(203 213 225 / 0.8)
+                  `,
+                }}
+              >
+                {/* Moon craters with enhanced shadows */}
+                <span
+                  className="absolute rounded-full"
+                  style={{
+                    background: "#64748b",
+                    width: "18%",
+                    aspectRatio: "1",
+                    left: "40%",
+                    top: "15%",
+                    boxShadow: `
+                      inset 1px 1px 1px 0 rgb(15 23 42 / 0.25),
+                      0 0.5px 1px 0 rgb(255 255 255 / 0.25)
+                    `,
+                  }}
+                />
+                <span
+                  className="absolute rounded-full"
+                  style={{
+                    background: "#64748b",
+                    width: "20%",
+                    aspectRatio: "1",
+                    left: "65%",
+                    top: "58%",
+                    boxShadow: `
+                      inset 1px 1px 1px 0 rgb(15 23 42 / 0.25),
+                      0 0.5px 1px 0 rgb(255 255 255 / 0.25)
+                    `,
+                  }}
+                />
+                <span
+                  className="absolute rounded-full"
+                  style={{
+                    background: "#64748b",
+                    width: "34%",
+                    aspectRatio: "1",
+                    left: "18%",
+                    top: "40%",
+                    boxShadow: `
+                      inset 1px 1px 1px 0 rgb(15 23 42 / 0.25),
+                      0 0.5px 1px 0 rgb(255 255 255 / 0.25)
+                    `,
+                  }}
+                />
+              </span>
+            </span>
+          </div>
+        </div>
+      </button>
+    </div>
   );
 }

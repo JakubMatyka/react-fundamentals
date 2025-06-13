@@ -7,15 +7,12 @@
     <title>Vite + React + TS</title>
     <script>
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-      // Following official Tailwind CSS documentation approach
       const theme = localStorage.getItem("theme");
       const systemPrefersDark = window.matchMedia(
         "(prefers-color-scheme: dark)"
       ).matches;
 
-      const shouldBeDark =
-        theme === "dark" ||
-        (theme !== "light" && theme !== "dark" && systemPrefersDark);
+      const shouldBeDark = theme === "dark" || (!theme && systemPrefersDark);
 
       document.documentElement.classList.toggle("dark", shouldBeDark);
     </script>

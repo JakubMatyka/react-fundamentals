@@ -249,20 +249,18 @@ export function TaskManager() {
     priority: Task["priority"],
     isCompleted: boolean = false
   ) => {
-    const baseStyles =
-      "px-2 py-1 rounded-full text-xs font-semibold uppercase tracking-wide";
-    if (isCompleted)
-      return `${baseStyles} bg-gray-600 dark:bg-gray-700 text-gray-400`;
-
+    if (isCompleted) {
+      return "bg-gray-200/50 dark:bg-slate-600/50 text-gray-500 dark:text-gray-400";
+    }
     switch (priority) {
       case "high":
-        return `${baseStyles} bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800`;
+        return "bg-gradient-to-r from-red-500/20 to-pink-500/20 dark:from-red-400/30 dark:to-pink-400/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-500/30";
       case "medium":
-        return `${baseStyles} bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800`;
+        return "bg-gradient-to-r from-amber-500/20 to-yellow-500/20 dark:from-amber-400/30 dark:to-yellow-400/30 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-500/30";
       case "low":
-        return `${baseStyles} bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 border border-green-200 dark:border-green-800`;
+        return "bg-gradient-to-r from-emerald-500/20 to-teal-500/20 dark:from-emerald-400/30 dark:to-teal-400/30 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30";
       default:
-        return baseStyles;
+        return "bg-sky-100/50 dark:bg-purple-900/30 text-sky-600 dark:text-purple-400";
     }
   };
 
@@ -271,26 +269,26 @@ export function TaskManager() {
       case "high":
         return "border-l-red-500 dark:border-l-red-400";
       case "medium":
-        return "border-l-blue-500 dark:border-l-blue-400";
+        return "border-l-amber-500 dark:border-l-amber-400";
       case "low":
-        return "border-l-green-500 dark:border-l-green-400";
+        return "border-l-emerald-500 dark:border-l-emerald-400";
       default:
-        return "border-l-transparent";
+        return "border-l-sky-500 dark:border-l-purple-500";
     }
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg p-6 h-fit">
+    <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-sky-200/50 dark:border-purple-500/30 shadow-lg shadow-sky-100/50 dark:shadow-purple-900/20 p-6 h-fit transition-all duration-300 hover:shadow-xl hover:shadow-sky-200/60 dark:hover:shadow-purple-900/30">
       {/* Header */}
-      <div className="flex items-center gap-2 mb-4">
-        <div className="w-6 h-6 bg-blue-500 rounded-lg flex items-center justify-center text-white text-xs">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-8 h-8 bg-gradient-to-br from-sky-500 to-blue-600 dark:from-purple-500 dark:to-pink-600 rounded-xl flex items-center justify-center text-white shadow-lg">
           🚀
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-0 text-sm">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
             Task Manager
           </h3>
-          <p className="text-xs text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-sky-600 dark:text-purple-400 font-medium">
             <strong>useOptimistic</strong>: Immediate UI updates •{" "}
             <strong>useTransition</strong>: Smooth expensive operations
           </p>
@@ -298,20 +296,20 @@ export function TaskManager() {
       </div>
 
       {error && (
-        <div className="bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 px-2 py-1 rounded-lg mb-3 text-xs">
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 text-red-600 dark:text-red-400 px-3 py-2 rounded-xl mb-4 text-sm backdrop-blur-sm">
           ❌ {error}
         </div>
       )}
 
       {/* Add Task Section */}
-      <div className="bg-gray-100 dark:bg-gray-700/30 border border-gray-200 dark:border-gray-600/50 rounded-lg p-2 mb-4">
-        <div className="flex flex-wrap gap-1 items-center">
+      <div className="bg-sky-50/50 dark:bg-slate-700/30 border border-sky-200/50 dark:border-purple-500/20 rounded-xl p-4 mb-6 backdrop-blur-sm">
+        <div className="flex flex-wrap gap-2 items-center">
           <input
             type="text"
             value={newTaskText}
             onChange={(e) => setNewTaskText(e.target.value)}
             placeholder="Enter a new task..."
-            className="flex-1 min-w-32 text-xs py-1 px-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="flex-1 min-w-40 text-sm py-2 px-4 bg-white/80 dark:bg-slate-700/80 border border-sky-200 dark:border-purple-500/50 rounded-lg text-gray-900 dark:text-white placeholder-sky-500/70 dark:placeholder-purple-400/70 focus:outline-none focus:ring-2 focus:ring-sky-500 dark:focus:ring-purple-500 focus:border-transparent backdrop-blur-sm transition-all duration-200"
             onKeyDown={(e) => e.key === "Enter" && handleAddTask()}
           />
           <select
@@ -319,7 +317,7 @@ export function TaskManager() {
             onChange={(e) =>
               setNewTaskPriority(e.target.value as Task["priority"])
             }
-            className="text-xs py-1 px-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-white"
+            className="text-sm py-2 px-3 bg-white/80 dark:bg-slate-700/80 border border-sky-200 dark:border-purple-500/50 rounded-lg text-gray-900 dark:text-white backdrop-blur-sm"
           >
             <option value="low">Low</option>
             <option value="medium">Medium</option>
@@ -327,7 +325,7 @@ export function TaskManager() {
           </select>
           <button
             onClick={handleAddTask}
-            className="px-2 py-1 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all duration-200 text-xs whitespace-nowrap"
+            className="px-4 py-2 bg-gradient-to-r from-sky-500 to-blue-600 dark:from-purple-500 dark:to-pink-600 text-white rounded-lg font-medium hover:from-sky-600 hover:to-blue-700 dark:hover:from-purple-600 dark:hover:to-pink-700 transition-all duration-200 text-sm whitespace-nowrap shadow-lg hover:shadow-xl"
           >
             + Add Task
           </button>
@@ -335,17 +333,17 @@ export function TaskManager() {
       </div>
 
       {/* Controls */}
-      <div className="flex flex-wrap justify-between items-center gap-2 mb-4">
-        <div className="flex flex-wrap items-center gap-1">
-          <span className="text-xs text-gray-600 dark:text-gray-400 mr-1">
+      <div className="flex flex-wrap justify-between items-center gap-3 mb-6">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-sm text-sky-600 dark:text-purple-400 font-medium mr-1">
             Filter:
           </span>
           <button
             onClick={() => handleFilterChange("all")}
-            className={`px-2 py-0.5 rounded-full text-xs font-medium transition-all duration-200 ${
+            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
               filter === "all"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+                ? "bg-gradient-to-r from-sky-500 to-blue-600 dark:from-purple-500 dark:to-pink-600 text-white shadow-lg"
+                : "bg-sky-100/50 dark:bg-slate-700/50 text-sky-700 dark:text-purple-300 hover:bg-sky-200/70 dark:hover:bg-slate-600/70 backdrop-blur-sm"
             }`}
             disabled={isPending}
           >
@@ -353,10 +351,10 @@ export function TaskManager() {
           </button>
           <button
             onClick={() => handleFilterChange("pending")}
-            className={`px-2 py-0.5 rounded-full text-xs font-medium transition-all duration-200 ${
+            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
               filter === "pending"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+                ? "bg-gradient-to-r from-sky-500 to-blue-600 dark:from-purple-500 dark:to-pink-600 text-white shadow-lg"
+                : "bg-sky-100/50 dark:bg-slate-700/50 text-sky-700 dark:text-purple-300 hover:bg-sky-200/70 dark:hover:bg-slate-600/70 backdrop-blur-sm"
             }`}
             disabled={isPending}
           >
@@ -364,10 +362,10 @@ export function TaskManager() {
           </button>
           <button
             onClick={() => handleFilterChange("completed")}
-            className={`px-2 py-0.5 rounded-full text-xs font-medium transition-all duration-200 ${
+            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
               filter === "completed"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+                ? "bg-gradient-to-r from-sky-500 to-blue-600 dark:from-purple-500 dark:to-pink-600 text-white shadow-lg"
+                : "bg-sky-100/50 dark:bg-slate-700/50 text-sky-700 dark:text-purple-300 hover:bg-sky-200/70 dark:hover:bg-slate-600/70 backdrop-blur-sm"
             }`}
             disabled={isPending}
           >
@@ -375,15 +373,15 @@ export function TaskManager() {
           </button>
         </div>
 
-        <div className="flex items-center gap-1">
-          <span className="text-xs text-gray-600 dark:text-gray-400">
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-sky-600 dark:text-purple-400 font-medium">
             Sort by:
           </span>
           <select
             value={sortBy}
             onChange={(e) => handleSortChange(e.target.value as TaskSort)}
             disabled={isPending}
-            className="text-xs py-1 px-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-white"
+            className="text-sm py-1.5 px-3 bg-white/80 dark:bg-slate-700/80 border border-sky-200 dark:border-purple-500/50 rounded-lg text-gray-900 dark:text-white backdrop-blur-sm"
           >
             <option value="created">Date Created</option>
             <option value="priority">Priority</option>
@@ -392,7 +390,7 @@ export function TaskManager() {
         </div>
 
         {isPending && (
-          <div className="flex items-center gap-1 text-xs text-blue-600 dark:text-blue-400 font-medium">
+          <div className="flex items-center gap-2 text-sm text-sky-600 dark:text-purple-400 font-medium bg-sky-50/50 dark:bg-purple-900/20 px-3 py-1.5 rounded-full backdrop-blur-sm">
             ⏳ Processing...
           </div>
         )}
@@ -400,20 +398,20 @@ export function TaskManager() {
 
       {/* Task List */}
       <div
-        className={`space-y-1 min-h-32 transition-opacity duration-300 ${
+        className={`space-y-3 min-h-40 transition-opacity duration-300 ${
           isPending ? "opacity-60" : ""
         }`}
       >
         {processedTasks.map((task) => (
           <div
             key={task.id}
-            className={`flex items-center gap-2 p-2 bg-gray-100 dark:bg-gray-700/30 border border-gray-200 dark:border-gray-600/50 rounded-lg transition-all duration-200 hover:bg-gray-200 dark:hover:bg-gray-600/30 border-l-4 ${getTaskBorderColor(
+            className={`flex items-center gap-3 p-3 bg-white/50 dark:bg-slate-700/30 border border-sky-100 dark:border-purple-500/20 rounded-xl transition-all duration-200 hover:bg-sky-50/70 dark:hover:bg-slate-600/40 hover:shadow-md backdrop-blur-sm border-l-4 ${getTaskBorderColor(
               task.priority
-            )} ${task.completed ? "opacity-60" : ""}`}
+            )} ${task.completed ? "opacity-70" : ""}`}
           >
             <button
               onClick={() => handleToggleTask(task.id)}
-              className="text-xs hover:scale-110 transition-transform duration-200"
+              className="text-lg hover:scale-110 transition-transform duration-200"
               title={task.completed ? "Mark as pending" : "Mark as completed"}
             >
               {task.completed ? "✅" : "⭕"}
@@ -421,7 +419,7 @@ export function TaskManager() {
 
             <div className="flex-1 min-w-0">
               <div
-                className={`font-medium break-words text-xs ${
+                className={`font-medium break-words text-sm ${
                   task.completed
                     ? "line-through text-gray-500 dark:text-gray-400"
                     : "text-gray-900 dark:text-gray-100"
@@ -435,18 +433,18 @@ export function TaskManager() {
               className={`${getPriorityStyles(
                 task.priority,
                 task.completed
-              )} text-xs`}
+              )} text-sm px-2 py-1 rounded-full font-medium`}
             >
               {task.priority}
             </span>
 
-            <span className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
+            <span className="text-sm text-sky-600/80 dark:text-purple-400/80 whitespace-nowrap font-medium">
               {task.createdAt.toLocaleDateString()}
             </span>
 
             <button
               onClick={() => handleDeleteTask(task.id)}
-              className="text-xs hover:scale-110 transition-transform duration-200 opacity-60 hover:opacity-100 hover:text-red-500 dark:hover:text-red-400"
+              className="text-lg hover:scale-110 transition-transform duration-200 opacity-60 hover:opacity-100 hover:text-red-500 dark:hover:text-red-400"
               title="Delete task"
             >
               🗑️

@@ -2,7 +2,29 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Custom radial gradient utilities */
+.bg-gradient-radial {
+  background-image: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
 body {
   font-feature-settings: "rlig" 1, "calt" 1;
   min-height: 100vh;
+}
+
+/* Cloud star effect using pseudo-element technique */
+.cloud-star::before {
+  content: "";
+  z-index: -1;
+  width: 356%;
+  background: radial-gradient(hsl(0 0% 100% / 0.25) 40%, transparent 40.5%),
+    radial-gradient(hsl(0 0% 100% / 0.25) 56%, transparent 56.5%)
+      hsl(0 0% 100% / 0.25);
+  border-radius: 50%;
+  aspect-ratio: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: transform 0.5s cubic-bezier(0.4, -0.3, 0.6, 1.3);
+  transform: translate(calc(50% - var(--cloud-shift, 0) * 4%), -50%);
 }

@@ -4,25 +4,22 @@ import type { Theme, ThemeProviderProps } from "./types";
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(() => {
-    // Check localStorage first, default to system preference
+    // Check localStorage first, then system preference
     if (typeof window !== "undefined") {
       const stored = localStorage.getItem("theme") as Theme;
-      if (
-        stored &&
-        (stored === "light" || stored === "dark" || stored === "system")
-      ) {
+      if (stored && (stored === "light" || stored === "dark")) {
         return stored;
       }
+      // Default to system preference
+      return window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
     }
-    return "system"; // Default to system preference
+    return "dark"; // Default fallback
   });
 
   const toggleTheme = () => {
-    setTheme((prev) => {
-      if (prev === "light") return "dark";
-      if (prev === "dark") return "system";
-      return "light";
-    });
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
   const setThemeDirectly = (newTheme: Theme) => {
@@ -37,18 +34,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       // Remove existing theme classes
       document.documentElement.classList.remove("dark");
 
-      let shouldBeDark = false;
-
-      if (theme === "dark") {
-        shouldBeDark = true;
-      } else if (theme === "light") {
-        shouldBeDark = false;
-      } else if (theme === "system") {
-        shouldBeDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-      }
-
+      const shouldBeDark = theme === "dark";
       document.documentElement.classList.toggle("dark", shouldBeDark);
     };
 
@@ -56,27 +42,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     applyTheme();
 
     // Save theme preference to localStorage
-    if (theme === "light") {
-      localStorage.theme = "light";
-    } else if (theme === "dark") {
-      localStorage.theme = "dark";
-    } else if (theme === "system") {
-      localStorage.removeItem("theme");
-    }
-
-    // Listen for system theme changes when using system preference
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleSystemThemeChange = () => {
-      if (theme === "system") {
-        applyTheme();
-      }
-    };
-
-    mediaQuery.addEventListener("change", handleSystemThemeChange);
-
-    return () => {
-      mediaQuery.removeEventListener("change", handleSystemThemeChange);
-    };
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   return (

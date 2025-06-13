@@ -4,14 +4,14 @@ export function TextDisplay() {
   const { text } = useTextContext();
 
   return (
-    <div className="space-y-3">
-      <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+    <div className="space-y-4">
+      <p className="text-sky-600 dark:text-purple-400 font-medium">
         Current Text:
-      </div>
-      <div className="p-3 bg-gray-100 dark:bg-gray-700/30 border border-gray-200 dark:border-gray-600/50 rounded-lg">
-        <div className="font-mono text-sm text-gray-900 dark:text-gray-100 break-words">
+      </p>
+      <div className="bg-sky-50/70 dark:bg-slate-700/50 border border-sky-200/50 dark:border-purple-500/30 rounded-xl p-4 backdrop-blur-sm">
+        <p className="text-gray-900 dark:text-gray-100 font-medium text-lg break-words">
           "{text}"
-        </div>
+        </p>
       </div>
     </div>
   );
